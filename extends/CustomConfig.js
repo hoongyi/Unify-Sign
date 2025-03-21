@@ -13,6 +13,12 @@ module.exports = {
       taskCode: 'douyinShop',
       script: 'DouyinShop.js',
       enabled: true
+    },
+    {
+      name: '支付宝视频领红包',
+      taskCode: 'alipayVedio',
+      script: 'AlipayVedio.js',
+      enabled: true
     }
   ]
 }
