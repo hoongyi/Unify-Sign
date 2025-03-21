@@ -30,7 +30,7 @@ function SignRunner () {
     // ...
     // 在这里写签到执行的代码
     // ...
-
+    this.openApp()
     // 执行成功后触发 标记当前任务已完成 失败了请勿调用
     this.setExecuted()
   }
@@ -40,7 +40,7 @@ function SignRunner () {
    *
    * @returns 
    */
-  this.openEleme = function () {
+  this.openApp = function () {
     commonFunctions.launchPackage(_package_name)
     sleep(500)
     this.pushLog('校验是否有打开确认弹框')
