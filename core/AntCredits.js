@@ -128,6 +128,14 @@ function CreditRunner () {
     FloatyInstance.setFloatyText('准备执行每日签到')
     // 直接进入积分签到
     openSignPage()
+    sleep(1000)
+    target = widgetUtils.widgetGetOne('立即领取')
+    if (target && this.displayButtonAndClick(target, '点击立即领取')) {
+      sleep(1000)
+    } else {
+      FloatyInstance.setFloatyText('未能找到立即领取按钮')
+      sleep(1000)
+    }
     this.doTask()
     // 十五秒广告
     this.doBrowseTask()
@@ -218,11 +226,13 @@ function CreditRunner () {
   }
 
   this.doBrowseTask = function () {
-    let browser15 = widgetUtils.widgetGetOne('逛15秒赚3积分')
-    if (widgetUtils.widgetCheck('.*点击或滑动以下内容.*', 3000) && this.displayButtonAndClick(browser15, '15秒任务')) {
+    let browser15 = widgetUtils.widgetGetOne('逛一逛赚积分')
+    if (widgetUtils.widgetCheck('.*滑动浏览以下内容.*', 3000) && this.displayButtonAndClick(browser15, '15秒任务')) {
       sleep(1000)
-      let limit = 16
-      while (limit-- > 0 && widgetUtils.widgetCheck('.*点击或滑动以下内容.*', 3000)) {
+      let limit = 32
+      let startY = config.device_height - config.device_height * 0.15
+      let endY = startY - config.device_height * 0.3
+      while (limit-- > 0 && widgetUtils.widgetCheck('.*滑动浏览以下内容.*', 3000)) {
         FloatyInstance.setFloatyText('等待' + limit + '秒')
         automator.gestureDown(startY, endY)
         sleep(1000)
