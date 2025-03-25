@@ -76,7 +76,7 @@ function SignRunner () {
     this.pushLog('ocr校验是否有跳过按钮')
     let skip = this.captureAndCheckByOcr('跳过')
     
-    //let skip = widgetUtils.widgetGetOne(/跳过$/, 5000)
+    //let skip = widgetUtils.widgetGetOne('\\s*下次再说\\s*',5000)
     if (skip) {
       this.displayButtonAndClick(skip, '找到了跳过按钮')
     } else {
