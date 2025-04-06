@@ -30,7 +30,47 @@ function SignRunner () {
     // ...
     // 在这里写签到执行的代码
     // ...
-    this.openApp()
+    let button = this.openApp()
+    
+    this.displayButtonAndClick(button, '找到了赚钱按钮')
+    this.pushLog('收金币')
+    let coin = widgetUtils.widgetGetOne('收金币', 3000)
+    if (coin) {
+      this.displayButtonAndClick(coin, '找到了收金币按钮')
+    } else {
+      this.pushLog('没有找到收金币按钮')
+    }
+    this.pushLog('看广告视频再得')
+    let ad = widgetUtils.widgetGetOne(/^看广告视频再得.*?金币/, 3000)
+    if (ad) {
+      this.displayButtonAndClick(ad, '找到了看广告视频再得按钮')
+    } else {
+      this.pushLog('没有找到看广告视频再得按钮')
+    }
+    this.pushLog('领取金币')
+    let receive = widgetUtils.widgetGetOne(/^领取成功/)
+    if (receive) {
+      this.displayButtonAndClick(receive, '找到了领取金币按钮')
+    } else {
+      this.pushLog('没有找到领取金币按钮')
+    }
+    while (true) {
+      this.pushLog('继续收金币')
+      let coin = widgetUtils.widgetGetOne('继续领奖励', 3000)
+      if (coin) {
+        this.displayButtonAndClick(coin, '找到了收金币按钮')
+        let receive = widgetUtils.widgetGetOne(/^领取成功/)
+        if (receive) {
+          this.displayButtonAndClick(receive, '找到了领取金币按钮')
+        } else {
+          this.pushLog('没有找到领取金币按钮')
+        }
+      } else {
+        this.pushLog('没有找到收金币按钮')
+        break
+      }
+    }
+    
     // 执行成功后触发 标记当前任务已完成 失败了请勿调用
     this.setExecuted()
   }
@@ -50,7 +90,7 @@ function SignRunner () {
     } else {
       this.pushLog('没有打开确认弹框')
     }
-    return widgetUtils.widgetGetOne('我的')
+    return widgetUtils.widgetGetOne('，按钮')
   }
   
 }
