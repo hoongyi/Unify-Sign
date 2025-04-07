@@ -109,7 +109,11 @@ let lastFilled = false;
 let delay = 0
 setInterval(() => {
     delay -= 1000;
-    if (text("开心收下").visibleToUser(true).findOnce()) {
+    if (text("明日可领").visibleToUser(true).findOnce()) {
+        console.log("任务结束");
+        sleep(1000);
+        exit();
+    } else if (text("开心收下").visibleToUser(true).findOnce()) {
         sleep(1000);
         clickCom('text', '开心收下');
     } else if (desc("关闭").visibleToUser(true).findOnce()) {
